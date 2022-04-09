@@ -2,6 +2,30 @@
 [![Build Status](https://travis-ci.org/PyMesh/PyMesh.svg?branch=main)](https://travis-ci.org/PyMesh/PyMesh)
 [![Documentation Status](https://readthedocs.org/projects/pymesh/badge/?version=latest)](https://pymesh.readthedocs.io/en/latest/?badge=latest)
 
+### This fork's preface! ###
+
+For years now it has seemed that PyMesh's Windows support has been lacking.
+The maintainer of the main repo seems to be extremely busy, so I'll set up this
+repo in the hopes of providing Windows support until changes can be merged into
+main PyMesh.
+
+For prosperity, the basics steps I've noted down so far are:
+* "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat"
+* Made release
+* CGAL: Don't use GMP (CGAL_DISABLE_GMP)
+* CGAL: Build and install boost and add to path
+* Cork: Build and install mpir
+* Cork: Had to change Cork CMake
+* PyMesh: Don't use GMP (CGAL_DISABLE_GMP)
+* PyMesh: Edited code to compile
+
+* Add Pymesh c++ lib dir to path
+* Added os.add_dll_directory(os.path.normpath("X:/Development/PyMesh/python/pymesh/third_party/bin")) to top of Mesh.py in install
+* edit to use pytest (test = numpy.test)
+* install pytest
+* install hypothosis
+
+I'll be trying to integrate these steps into the normal pipeline. it may take some time...
 
 ### About PyMesh ###
 
