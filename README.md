@@ -35,8 +35,8 @@ Build steps:
     * Run `bootstrap && .\b2`
     * From the boost root dir add `stage/lib/` to your path
     * You will most likely have to restart your terminal
-3. [Py] Install pytest
-4. [Py] Install hypothosis
+3. [Py] Install pytest with `pip install pytest`
+4. [Py] Install hypothosis with `pip install hypothesis`
 5. Run `python setup.py build`
 6. Run `python setup.py install`
 7. Run `python -c "import pymesh; pymesh.test()"`
