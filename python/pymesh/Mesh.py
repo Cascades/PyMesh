@@ -2,6 +2,8 @@ import os.path
 import sys
 import numpy as np
 
+os.add_dll_directory(os.path.normpath(os.path.join(os.path.dirname(os.path.realpath(__file__)), "third_party", "bin")))
+
 import PyMesh
 
 class Mesh(object):
