@@ -30,11 +30,16 @@ I'll be trying to integrate these steps into the normal pipeline. it may take so
 Build steps:
 
 1. [C++] Build and install boost and add to path
-2. [Py] Install pytest
-3. [Py] Install hypothosis
-4. Run `python setup.py build`
-5. Run `python setup.py install`
-6. Run `python -c "import pymesh; pymesh.test()"`
+    * Get your required source from: https://www.boost.org/users/download/
+    * `cd` into the boost root directory
+    * Run `bootstrap && .\b2`
+    * From the boost root dir add `stage/lib/` to your path
+    * You will most likely have to restart your terminal
+3. [Py] Install pytest
+4. [Py] Install hypothosis
+5. Run `python setup.py build`
+6. Run `python setup.py install`
+7. Run `python -c "import pymesh; pymesh.test()"`
 
 ### About PyMesh ###
 
