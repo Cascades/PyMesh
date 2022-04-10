@@ -5,6 +5,10 @@ if(CCACHE_FOUND)
     message(STATUS "ccache enabled")
 endif(CCACHE_FOUND)
 
+if(MSVC)
+    set(CGAL_DISABLE_GMP On)
+endif()
+
 # Set output directories
 set(LIBRARY_OUTPUT_PATH    ${PROJECT_SOURCE_DIR}/python/pymesh/lib)
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)

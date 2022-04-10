@@ -35,7 +35,7 @@ namespace ClipperEngineHelper {
             if (itr != adjacencies.end()) {
                 itr->second.push_back(edge[1]);
             } else {
-                adjacencies.insert({edge[0], {edge[1]}});
+                adjacencies.insert({static_cast<size_t>(edge[0]), {edge[1]}});
             }
         }
 

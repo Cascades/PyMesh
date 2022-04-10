@@ -12,7 +12,7 @@ import shutil
 import sys
 
 def get_third_party_dependencies():
-    return ["cgal", "cork", "eigen",
+    return ["cgal", "mpir", "cork", "eigen",
         "tetgen", "triangle", "qhull", "clipper", "draco",
         "tbb", "mmg", "json"]
 
@@ -28,25 +28,34 @@ def get_pymesh_dir():
     return os.path.join(sys.path[0], "..");
 
 def build_generic(libname, build_flags="", cleanup=True):
+    root_libname = os.path.normpath(libname)
+    root_libname = root_libname.split("/")[0]
     pymesh_dir = get_pymesh_dir();
-    build_dir = os.path.join(pymesh_dir, "third_party", "build", libname);
+    build_dir = os.path.join(pymesh_dir, "third_party", "build", root_libname);
     if not os.path.exists(build_dir):
         os.makedirs(build_dir);
+    
+    arg0 = os.path.join(pymesh_dir, 'third_party', libname)
+    arg1 = os.path.join(pymesh_dir, 'python', 'pymesh', 'third_party')
 
     # Configure cgal
     cmd = "cmake" + \
-            " {}/third_party/{}".format(pymesh_dir, libname) + \
+            " {}".format(arg0) + \
+            " -DCMAKE_BUILD_TYPE=Release" + \
             " -DBUILD_SHARED_LIBS=Off" + \
             " -DCMAKE_POSITION_INDEPENDENT_CODE=On" + \
             build_flags + \
-            " -DCMAKE_INSTALL_PREFIX={}/python/pymesh/third_party/".format(pymesh_dir);
+            " -DCMAKE_INSTALL_PREFIX={}".format(arg1);
+    print("|_Configuring: " + cmd)
     subprocess.check_call(cmd.split(), cwd=build_dir);
 
     # Build cgal
     cmd = "cmake --build {}".format(build_dir);
+    print("|_Building: " + cmd)
     subprocess.check_call(cmd.split());
 
-    cmd = "cmake --build {} --target install".format(build_dir);
+    cmd = "cmake --install {}".format(build_dir);
+    print("|_Installing: " + cmd)
     subprocess.check_call(cmd.split());
 
     # Clean up
@@ -54,12 +63,13 @@ def build_generic(libname, build_flags="", cleanup=True):
         shutil.rmtree(build_dir)
 
 def build(package, cleanup):
+    print("Building " + str(package) + "...")
     if package == "all":
         for libname in get_third_party_dependencies():
             build(libname, cleanup);
     elif package == "cgal":
         build_generic("cgal",
-                " -DWITH_CGAL_ImageIO=Off -DWITH_CGAL_Qt5=Off",
+                " -DWITH_CGAL_ImageIO=Off -DWITH_CGAL_Qt5=Off -DCGAL_DISABLE_GMP=On",
                 cleanup=cleanup);
     elif package == "clipper":
         build_generic("Clipper/cpp", cleanup=cleanup);
@@ -70,6 +80,11 @@ def build(package, cleanup):
     elif package == "json":
         build_generic("json",
                 " -DJSON_BuildTests=Off",
+                cleanup=cleanup);
+    elif package == "mpir":
+        if os.name != "nt":
+            return
+        build_generic("mpir/msvc/vs22",
                 cleanup=cleanup);
     else:
         build_generic(package, cleanup=cleanup);

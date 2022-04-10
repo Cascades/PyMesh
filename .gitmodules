@@ -4,7 +4,7 @@
 	shallow = true
 [submodule "third_party/cork"]
 	path = third_party/cork
-	url = https://github.com/PyMesh/cork.git
+	url = https://github.com/Cascades/cork.git
 	shallow = true
 [submodule "third_party/tetgen"]
 	path = third_party/tetgen
@@ -78,3 +78,6 @@
 [submodule "third_party/json"]
 	path = third_party/json
 	url = https://github.com/nlohmann/json.git
+[submodule "third_party/mpir"]
+	path = third_party/mpir
+	url = git@github.com:Cascades/mpir.git

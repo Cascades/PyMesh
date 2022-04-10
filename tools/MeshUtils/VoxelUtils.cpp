@@ -70,7 +70,7 @@ VectorF VoxelUtils::is_delaunay(
     }
 
     constexpr int INVALID = std::numeric_limits<int>::max();
-    auto get_opposite_vertex = [&tets](size_t index, const Triplet& f) {
+    auto get_opposite_vertex = [&tets, &INVALID](size_t index, const Triplet& f) {
         for (size_t i=0; i<4; i++) {
             const int val = tets(index, i);
             if (val != f.get_data()[0] &&
