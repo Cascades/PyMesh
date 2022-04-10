@@ -4,7 +4,7 @@
 	shallow = true
 [submodule "third_party/cork"]
 	path = third_party/cork
-	url = https://github.com/Cascades/cork.git
+	url = git@github.com:Cascades/cork.git
 	shallow = true
 [submodule "third_party/tetgen"]
 	path = third_party/tetgen
