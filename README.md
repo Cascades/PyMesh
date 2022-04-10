@@ -29,9 +29,12 @@ I'll be trying to integrate these steps into the normal pipeline. it may take so
 
 Build steps:
 
-1. python setup.py build
-2. python setup.py install
-3. python -c "import pymesh; pymesh.test()"
+1. [C++] Build and install boost and add to path
+2. [Py] Install pytest
+3. [Py] Install hypothosis
+4. Run `python setup.py build`
+5. Run `python setup.py install`
+6. Run `python -c "import pymesh; pymesh.test()"`
 
 ### About PyMesh ###
 
